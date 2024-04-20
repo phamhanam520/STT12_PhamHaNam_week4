@@ -27,6 +27,8 @@ public class RedisExample implements CommandLineRunner {
     }
 
     public void listExample(){
+        // xoa key loda_list
+//        template.delete("loda_list");
         // Tạo ra một list gồm 2 phần tử
         List<String> list = new ArrayList<>();
         list.add("Hello");
@@ -36,7 +38,8 @@ public class RedisExample implements CommandLineRunner {
         template.opsForList().rightPushAll("loda_list", list);
 //        template.opsForList().rightPushAll("loda_list", "hello", "world");
 
-        System.out.println("Size of key loda: "+template.opsForList().size("loda_list"));
+        System.out.println("redis db: "+template.opsForList().size("loda_list"));
+        template.opsForList().range("loda_list", 0, -1).forEach(System.out::println);
     }
 }
 
